@@ -33,7 +33,7 @@ cd ~/public_html/binaries/$BRANCH ; sha256sum n* > $BRANCH.SHA256SUM.asc &&\
 
 cd ~/gitian-builder &&\
 USE_DOCKER=1 ./bin/gbuild --memory ${MEMORY}  -j${JOBS} --commit navcoin-core=${BRANCH} --url navcoin-core=${URL} ../navcoin-core/contrib/gitian-descriptors/gitian-osx.yml &&\
-mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz ~/public_html/binaries/$BRANCH/ &&\
+mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz build/out/*.dmg ~/public_html/binaries/$BRANCH/ &&\
 cp var/install.log ~/public_html/binaries/$BRANCH/log/osx/ &&\
 cp var/build.log ~/public_html/binaries/$BRANCH/log/osx/ &&\
 cd ~/public_html/binaries/$BRANCH ; sha256sum n* > $BRANCH.SHA256SUM.asc &&\
