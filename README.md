@@ -1,5 +1,5 @@
 # autobuilder
-Auto Gitian builder for NavCoin
+Auto Gitian builder for NavCoin. Both scripts should be in $HOME.
 
 ## autobuild.sh
 This is the main script which must be run in background. `ACCESS_TOKEN` needs to be set to a valid GitHub access token.
