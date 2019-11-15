@@ -20,7 +20,7 @@ LASTBUILD=$(cat ~/public_html/binaries/$BRANCH/.lastbuild)
 
 if [ "$LASTCOMMIT" == "$LASTBUILD" ]
 then
-   exit 0
+   exit 1
 fi
 
 make -C ~/navcoin-core/depends download SOURCES_PATH=`pwd`/cache/common
@@ -51,3 +51,5 @@ cd ~/public_html/binaries/$BRANCH && rm *SHA256SUM* ; sha256sum n* > $BRANCH.SHA
 echo $LASTCOMMIT >  ~/public_html/binaries/$BRANCH/.lastbuild
 
 sleep 30
+
+exit 0
