@@ -4,7 +4,6 @@ REPO=$1
 BRANCH=$2
 PR=$3
 URL=https://github.com/$REPO/navcoin-core.git
-ACCESS_TOKEN=g17h084cc351704e1
 JOBS=7
 MEMORY=24000
 
@@ -48,13 +47,6 @@ cd ~/public_html/binaries/$BRANCH && rm *SHA256SUM* ; sha256sum n* > $BRANCH.SHA
 
 rm ~/public_html/binaries/$BRANCH/*debug* &&\
 cd ~/public_html/binaries/$BRANCH && rm *SHA256SUM* ; sha256sum n* > $BRANCH.SHA256SUM.asc &&\
-
-if (( $PR > 0 ));
-then
-   curl -s -H "Authorization: token ${ACCESS_TOKEN}" \
-    -X POST -d '{"body": "A new build of ${LASTCOMMIT} has completed succesfully!\nBinaries available at https://build.nav.community/binaries/${BRANCH}"}' \
-    "https://api.github.com/repos/${REPO}/navcoin-core/issues/${PR}/comments"
-fi
 
 echo $LASTCOMMIT >  ~/public_html/binaries/$BRANCH/.lastbuild
 
