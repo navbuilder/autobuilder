@@ -13,6 +13,8 @@ do
         bash ~/build.sh ${arrPR[0]} ${arrPR[1]} ${arrIDS[$I]}
         I=$((I+1))
     done
+    
+    bash ~/build.sh navcoin master 0
 
     sleep 120
 done
