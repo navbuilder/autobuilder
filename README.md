@@ -2,10 +2,10 @@
 Auto Gitian builder for NavCoin
 
 ## autobuild.sh
-This is the main script which must be run in background
+This is the main script which must be run in background. `ACCESS_TOKEN` needs to be set to a valid GitHub access token.
 
 ## build.sh
-Bash script which takes three arguments (repo, branch and pr-id) and starts a build.
+Bash script which takes three arguments (repo, branch and pr-id) and starts a build. `MEMORY` and `JOBS` should be set to valid values depending on the system specs.
 
 Assumes:
 - Docker and jq installed in the system
