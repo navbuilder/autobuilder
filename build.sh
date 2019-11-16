@@ -24,10 +24,15 @@ then
    exit 1
 fi
 
+function abortBuild {
+   cp var/*.log ~/public_html/binaries/$BRANCH/log/$1/
+   exit 1
+}
+
 {
   cd ~/gitian-builder &&\
   USE_DOCKER=1 ./bin/gbuild --memory ${MEMORY} -j${JOBS} --commit navcoin-core=${BRANCH} --url navcoin-core=${URL} ../navcoin-core/contrib/gitian-descriptors/gitian-win.yml;
-} ||  cp var/*.log ~/public_html/binaries/$BRANCH/log/win/ && exit 1;
+} || abortBuild win
 
 mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz ~/public_html/binaries/$BRANCH/ &&\
 cp var/install.log ~/public_html/binaries/$BRANCH/log/win/ &&\
@@ -37,7 +42,7 @@ cd ~/public_html/binaries/$BRANCH ; sha256sum n* > $BRANCH.SHA256SUM.asc &&\
 {
   cd ~/gitian-builder &&\
   USE_DOCKER=1 ./bin/gbuild --memory ${MEMORY}  -j${JOBS} --commit navcoin-core=${BRANCH} --url navcoin-core=${URL} ../navcoin-core/contrib/gitian-descriptors/gitian-osx.yml;
-} || cp var/*.log ~/public_html/binaries/$BRANCH/log/osx/ && exit 1;
+} || abortBuild osx
 
 mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz build/out/*.dmg ~/public_html/binaries/$BRANCH/ &&\
 cp var/install.log ~/public_html/binaries/$BRANCH/log/osx/ &&\
@@ -47,7 +52,7 @@ cd ~/public_html/binaries/$BRANCH ; sha256sum n* > $BRANCH.SHA256SUM.asc &&\
 {
   cd ~/gitian-builder &&\
   USE_DOCKER=1 ./bin/gbuild --memory ${MEMORY}  -j${JOBS} --commit navcoin-core=${BRANCH} --url navcoin-core=${URL} ../navcoin-core/contrib/gitian-descriptors/gitian-linux.yml;
-} || cp var/*.log ~/public_html/binaries/$BRANCH/log/linux/ && exit 1;
+} || abortBuild linux
 
 mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz ~/public_html/binaries/$BRANCH/ &&\
 cp var/install.log ~/public_html/binaries/$BRANCH/log/linux/ &&\
