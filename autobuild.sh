@@ -16,7 +16,7 @@ do
         LASTCOMMIT=$(cat ~/public_html/binaries/${arrPR[1]}/.lastbuild) && \
         curl -s -H "Authorization: token ${ACCESS_TOKEN}" \
          -X POST -d '{"body": "A new build of ${LASTCOMMIT} has completed succesfully!\nBinaries available at https://build.nav.community/binaries/${arrPR[1]}"}' \
-         "https://api.github.com/repos/${arrPR[0]}/navcoin-core/issues/${arrIDS[$I]}/comments"
+         "https://api.github.com/repos/navcoin/navcoin-core/issues/${arrIDS[$I]}/comments"
         I=$((I+1))
     done
 
