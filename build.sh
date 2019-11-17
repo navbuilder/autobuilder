@@ -34,7 +34,7 @@ function abortBuild {
   USE_DOCKER=1 ./bin/gbuild --memory ${MEMORY} -j${JOBS} --commit navcoin-core=${BRANCH} --url navcoin-core=${URL} ../navcoin-core/contrib/gitian-descriptors/gitian-win.yml;
 } || abortBuild win
 
-mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz ~/public_html/binaries/$BRANCH/ &&\
+mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz build/out/navcoin-*.zip build/out/navcoin-*.exe ~/public_html/binaries/$BRANCH/ &&\
 cp var/install.log ~/public_html/binaries/$BRANCH/log/win/ &&\
 cp var/build.log ~/public_html/binaries/$BRANCH/log/win/ &&\
 cd ~/public_html/binaries/$BRANCH ; sha256sum n* > $BRANCH.SHA256SUM.asc &&\
