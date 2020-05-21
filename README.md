@@ -26,7 +26,7 @@ pushd ./gitian-builder
 git checkout d36b85d4114cc055ed414cd872b24aabe494c394
 bin/make-base-vm --docker --arch amd64 --suite bionic
 mkdir -p inputs
-pushd .inputs
+pushd ./inputs
 wget https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
 wget http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 wget https://bitcoincore.org/depends-sources/sdks/MacOSX10.11.sdk.tar.gz
