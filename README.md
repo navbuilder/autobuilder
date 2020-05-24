@@ -23,8 +23,8 @@ sudo apt install docker-ce jq build-essential
 cd $HOME
 git clone https://github.com/devrandom/gitian-builder.git
 git checkout d36b85d4114cc055ed414cd872b24aabe494c394
-bin/make-base-vm --docker --arch amd64 --suite bionic
 pushd ./gitian-builder
+bin/make-base-vm --docker --arch amd64 --suite bionic
 mkdir -p inputs
 wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
 wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
