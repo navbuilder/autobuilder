@@ -11,11 +11,14 @@ Assumes:
 - Docker and jq installed in the system
 ```bash
 sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
+sudo apt install apt-transport-https ca-certificates curl software-properties-common apt-cacher
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt update
-sudo apt install docker-ce jq build-essential ruby-full
+sudo apt install docker-ce jq build-essential ruby-full apt-cacher
+echo 'allowed_hosts = *' | sudo tee -a /etc/apt-cacher/apt-cacher.conf
+echo 'limit = 0' | sudo tee -a /etc/apt-cacher/apt-cacher.conf
+sudo service apt-cacher restart
 ```
 - WebServer with root folder in ~/public_html 
 - An instance of gitian-builder in $HOME:
@@ -23,11 +26,11 @@ sudo apt install docker-ce jq build-essential ruby-full
 cd $HOME
 git clone https://github.com/devrandom/gitian-builder.git
 pushd ./gitian-builder
-git checkout d36b85d4114cc055ed414cd872b24aabe494c394
 bin/make-base-vm --docker --arch amd64 --suite bionic
 mkdir -p inputs
 pushd ./inputs
 wget https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
 wget http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 wget https://bitcoincore.org/depends-sources/sdks/MacOSX10.11.sdk.tar.gz
+wget https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz
 ```
