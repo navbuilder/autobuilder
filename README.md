@@ -1,5 +1,5 @@
 # autobuilder
-Auto Gitian builder for NavCoin. Both scripts should be in $HOME.
+Auto Gitian builder for NavCoin on Ubuntu 18.04 LTS Bionic Beaver. Both scripts should be in $HOME.
 
 ## autobuild.sh
 This is the main script which must be run in background. `ACCESS_TOKEN` needs to be set to a valid GitHub access token.
@@ -15,8 +15,7 @@ sudo apt install apt-transport-https ca-certificates curl software-properties-co
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt update
-sudo apt install docker-ce jq build-essential
-sudo apt install apt-cacher
+sudo apt install docker-ce jq build-essential ruby-full apt-cacher
 echo 'allowed_hosts = *' | sudo tee -a /etc/apt-cacher/apt-cacher.conf
 echo 'limit = 0' | sudo tee -a /etc/apt-cacher/apt-cacher.conf
 sudo service apt-cacher restart
@@ -26,12 +25,12 @@ sudo service apt-cacher restart
 ```bash
 cd $HOME
 git clone https://github.com/devrandom/gitian-builder.git
-bin/make-base-vm --docker --arch amd64 --suite bionic
 pushd ./gitian-builder
+bin/make-base-vm --docker --arch amd64 --suite bionic
 mkdir -p inputs
-wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
-wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
-cd inputs/
+pushd ./inputs
+wget https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+wget http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 wget https://bitcoincore.org/depends-sources/sdks/MacOSX10.11.sdk.tar.gz
 wget https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz
 ```
