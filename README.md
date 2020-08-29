@@ -15,10 +15,9 @@ sudo apt install apt-transport-https ca-certificates curl software-properties-co
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt update
-sudo apt install docker-ce jq build-essential ruby-full apt-cacher
-echo 'allowed_hosts = *' | sudo tee -a /etc/apt-cacher/apt-cacher.conf
-echo 'limit = 0' | sudo tee -a /etc/apt-cacher/apt-cacher.conf
-sudo service apt-cacher restart
+sudo apt install docker-ce jq build-essential ruby-full apt-cacher-ng
+echo 'PassThroughPattern: .*' | sudo tee -a /etc/apt-cacher-ng/acng.conf
+sudo service apt-cacher-ng restart
 ```
 - WebServer with root folder in ~/public_html 
 - An instance of gitian-builder in $HOME:
