@@ -31,7 +31,7 @@ function abortBuild {
 
 {
   cd ~/gitian-builder &&\
-  USE_DOCKER=1 ./bin/gbuild --memory ${MEMORY} -j${JOBS} --commit navcoin-core=${BRANCH} --url navcoin-core=${URL} ../navcoin-core/contrib/gitian-descriptors/gitian-win.yml;
+  USE_DOCKER=1 ./bin/gbuild --allow-sudo --memory ${MEMORY} -j${JOBS} --commit navcoin-core=${BRANCH} --url navcoin-core=${URL} ../navcoin-core/contrib/gitian-descriptors/gitian-win.yml;
 } || abortBuild win
 
 mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz build/out/navcoin-*.zip build/out/navcoin-*.exe ~/public_html/binaries/$BRANCH/ &&\
